@@ -86,11 +86,11 @@ au BufNewFile,BufRead *.css
 
 " for auto indent for genral files 
 autocmd BufReadPost * :DetectIndent 
-let g:detectindent_preferred_expandtab = 1 
-let g:detectindent_preferred_indent = 4 
+let g:detectindent_preferred_expandtab = 22
+let g:detectindent_preferred_indent = 2 
 
 " for js/coffee/jade files, 4 spaces
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+"autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 autocmd Filetype coffeescript setlocal ts=4 sw=4 sts=0 expandtab
 autocmd Filetype jade setlocal ts=4 sw=4 sts=0 expandtab
 
@@ -104,7 +104,6 @@ autocmd Filetype scala set sw=2
 autocmd Filetype scala set ts=2
 
 " for C++/C files 
-
 autocmd Filetype cpp set softtabstop=2
 autocmd Filetype cpp set sw=2
 autocmd Filetype cpp set ts=2
@@ -156,6 +155,18 @@ else
 endif
 call togglebg#map("<F5>")
 
+
+"Syantastics settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
 " nerdtree color
 Plugin 'scrooloose/nerdtree'
 
@@ -167,7 +178,6 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 
 " setting the powerline
@@ -236,6 +246,8 @@ Plugin 'fsharp/vim-fsharp'
 "Plugin 'jshint.vim'
 Plugin 'unite.vim'
 Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'mattn/emmet-vim'
+Plugin 'ctrlp.vim'
 
 " += C.vim config
 let  g:C_UseTool_cmake    = 'yes'
@@ -328,6 +340,7 @@ let g:go_fmt_command = "goimports"
 
 
 "+++ CtrlP +++
+set runtimepath^=~/.vim/bundle/ctrlp.vim 
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_max_height = 10
 let g:ctrlp_mruf_max = 250
@@ -457,6 +470,16 @@ autocmd FileType ruby map <leader>rc :!rubocop -a %<enter>
 autocmd FileType ruby map <leader>mt :!tt ruby %<enter>
 autocmd FileType ruby map <leader>mm :!tt rr<enter>
 autocmd FileType ruby map <leader>mtl :!tt ruby %:<C-r>=line('.')<CR><CR>
+
+" Vim-JavaScript settings
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
+
 
 " ++ Errors ++ with configuration 
 " au BufWrite *.rb :Autoformat
