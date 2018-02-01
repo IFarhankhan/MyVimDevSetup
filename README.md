@@ -3,4 +3,4 @@
 
 Clone and run :PluginInstall in vim 
 
-![alt text](Screen Shot.png "")
+![ScreenShot](https://github.com/Frrank1/MyVimDevSetup/blob/master/Screen%20Shot.png)
